@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-博客测试1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/01/03/%E5%8D%9A%E5%AE%A2%E6%B5%8B%E8%AF%951/" class="article-date">
+  <time class="dt-published" datetime="2026-01-04T07:01:24.032Z" itemprop="datePublished">2026-01-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>参考文章链接:<br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2442869">https://cloud.tencent.com/developer/article/2442869</a></p>
+<p>gdb命令总结：</p>
+<p>info proc mappings  # 查看进程内存映射<br>info args      # 查看函数参数的地址<br>info locals    # 查看局部变量的地址<br>info registers rsp rbp #查看栈地址范围<br>栈指针 ($rsp) 和基址指针 ($rbp)<br>info symbol 0x0000555555555378  #打印内存地址0x0000555555555378所在的内存段<br>x&#x2F;5g 0x555555557d20  #连续打印内存值</p>
+<h3 id="1、成员变量内存布局"><a href="#1、成员变量内存布局" class="headerlink" title="1、成员变量内存布局"></a>1、成员变量内存布局</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">class Basic &#123;</span><br><span class="line">public:</span><br><span class="line">    int a;</span><br><span class="line">    double b;</span><br><span class="line">&#125;;</span><br><span class="line">int main() &#123;</span><br><span class="line">    Basic temp;</span><br><span class="line">    temp.a = 10;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="en-resource://database/3886:1" alt="3c1d9959cd2576720527e7510825fa19.png"></p>
+<p><img src="en-resource://database/3884:1" alt="ce5ddd522077b810863e2f4561ead3aa.png"></p>
+<p>内存对齐：<br>内存对齐就是要求变量的起始地址，是4或者8的倍数上，具体是4还是8，决定于编译器的实现细节和硬件平台的要求</p>
+<p>内存对齐是谁来处理？<br>编译器，也可以用#pragma pack或alignas关键字</p>
+<p>为什么要内存对齐?<br>cpu访问内存地址时，对对齐的内存访问较快；如果不对齐，对讲较大的数据结构，可能存在跨缓存行或者内存页的存在，cpu加载时，就会多加载一些数据，导致加载变慢。<br>示例：若一个int（4字节）横跨两个64字节缓存行，需两次缓存加载，浪费带宽并增加延迟。</p>
+<h3 id="2、带函数成员-的对象内存布局"><a href="#2、带函数成员-的对象内存布局" class="headerlink" title="2、带函数成员 的对象内存布局"></a>2、带函数成员 的对象内存布局</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">class Basic &#123;</span><br><span class="line">public:</span><br><span class="line">    int a;</span><br><span class="line">    double b;</span><br><span class="line">    void setB(double value) &#123;</span><br><span class="line">        b = value; // 直接访问成员变量b</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main() &#123;</span><br><span class="line">    Basic temp;</span><br><span class="line">    temp.a = 10;</span><br><span class="line">    temp.setB(3.14);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1、成员函数是否会占用内存大小？<br><img src="en-resource://database/3888:1" alt="5f4a2317f466b86178c9261c7037ffb9.png"><br>不占用</p>
+<p>2、成员函数存储的区域哪里，怎么看出来？<br><img src="en-resource://database/3892:1" alt="3ce8216147c2cbcff7c946bc50382766.png"></p>
+<p>.text区域，通过gdb可看，info target<br>函数指针的地址是0x55555555485e，通过info target查看，<br>.text的地址范围是0x00005555555546a0 - 0x00005555555548f2 is .text</p>
+<p>3、成员函数是怎么拿到成员变量并进行访问和赋值的？<br><img src="en-resource://database/3890:1" alt="393f9ada648e90583d16efbff8e9fe7e.png"><br>通过gdb可以看出，成员函数，入参中，带着对象的this指针，this指针是整个对象的基地址，加上这些成员函数的偏移地址，计算出成员函数的base地址<br>然后就能访问到成员变量了。</p>
+<h3 id="3、私有成员的对象内存布局"><a href="#3、私有成员的对象内存布局" class="headerlink" title="3、私有成员的对象内存布局"></a>3、私有成员的对象内存布局</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">class Basic &#123;</span><br><span class="line">public:</span><br><span class="line">    int a;</span><br><span class="line">    double b;</span><br><span class="line">    void setB(double value) &#123;</span><br><span class="line">        b = value; // 直接访问成员变量b</span><br><span class="line">        secret(b);</span><br><span class="line">    &#125;</span><br><span class="line">private:</span><br><span class="line">    int c;</span><br><span class="line">    double d;</span><br><span class="line">    void secret(int temp) &#123;</span><br><span class="line">        d = temp + c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main() &#123;</span><br><span class="line">    Basic temp;</span><br><span class="line">    temp.a = 10;</span><br><span class="line">    temp.setB(3.14);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="en-resource://database/3896:1" alt="ada7d3f53ffad1fbe343132673bd1fd0.png"><br><img src="en-resource://database/3898:1" alt="fd46cdc1b7189cac4a622f699c01f85b.png"></p>
+<p>私有成员和公有成员变量内存地址一致</p>
+<p>私有成员的的访问属性在编译器有效，但可以在运行期，通过地址偏移，拿到私有成员变量的地址，进行赋值访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">class Basic &#123;</span><br><span class="line">public:</span><br><span class="line">    int a;</span><br><span class="line">    double b;</span><br><span class="line">    void setB(double value) &#123;</span><br><span class="line">        b = value; // 直接访问成员变量b</span><br><span class="line">        secret(b);</span><br><span class="line">    &#125;</span><br><span class="line">private:</span><br><span class="line">    int c;</span><br><span class="line">    double d;</span><br><span class="line">&#125;;</span><br><span class="line">int main() &#123;</span><br><span class="line">    Basic temp;</span><br><span class="line">    int* pC = reinterpret_cast&lt;int*&gt;(reinterpret_cast&lt;char*&gt;(&amp;temp) + 16);</span><br><span class="line">    *pC = 10000;</span><br><span class="line">    temp.setB(3.14);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="4、静态成员变量内存布局"><a href="#4、静态成员变量内存布局" class="headerlink" title="4、静态成员变量内存布局"></a>4、静态成员变量内存布局</h3><p>静态成员的生命周期，从被定义开始，直到程序结束 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">class Basic &#123;</span><br><span class="line">public:</span><br><span class="line">    static float alias;//声明</span><br><span class="line">    static float blias;//声明</span><br><span class="line">    static void show() &#123;</span><br><span class="line">        std::cout &lt;&lt; alias &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">float Basic::alias = 0.233; //定义</span><br><span class="line">float Basic::blias;//定义</span><br><span class="line">int main() &#123;</span><br><span class="line">    Basic temp;</span><br><span class="line">    Basic::show();</span><br><span class="line">    temp.show();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>1、静态成员不占用类的内存空间<br><img src="en-resource://database/3903:1" alt="797ae86f36046a2ddff032fe8cd644c5.png"></p>
+<p>2、初始化的静态成员变量放在.data区，未初始化的放在.bss段<br><img src="en-resource://database/3905:1" alt="e72ee0588b5ea2e009473d80ae4ac056.png"></p>
+<p>3、初始化的静态变量和未初始化的静态变量为什么要分开存储？<br>这里主要是考虑到二进制文件磁盘空间大小以及加载效率。在磁盘上，.data 占用实际的磁盘空间，因为它需要存储具体的初始值数据。.bss段不占用实际的存储空间，只需要在程序加载时由操作系统分配并清零相应的内存即可，这样可以减少可执行文件的大小。在程序启动时，操作系统可以快速地为.bss段分配内存并将其初始化为零，而无需从磁盘读取大量的零值数据，可以提高程序的加载速度。</p>
+<p>4、静态成员方法<br>存储在.text区，类似于全局函数，只是是静态的，只能限定在类内使用<br>同时，静态成员函数不能直接访问类成员变量，从打印地址中，看到没有this指针<br><img src="en-resource://database/3907:1" alt="221a3f6cfd14477ff89eaa1d3329e04e.png"></p>
+<h3 id="5、类继承的内存布局"><a href="#5、类继承的内存布局" class="headerlink" title="5、类继承的内存布局"></a>5、类继承的内存布局</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">class Basic &#123;</span><br><span class="line">public:</span><br><span class="line">    int a;</span><br><span class="line">    double b;</span><br><span class="line">    void setB(double value) &#123;</span><br><span class="line">        b = value; // 直接访问成员变量b</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">class Derived : public Basic &#123;</span><br><span class="line">public:</span><br><span class="line">    int c;</span><br><span class="line">    void setC(int value) &#123;</span><br><span class="line">        c = value; // 直接访问成员变量c</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main() &#123;</span><br><span class="line">    Derived temp;</span><br><span class="line">    temp.a = 10;</span><br><span class="line">    temp.setB(3.14);</span><br><span class="line">    temp.c = 1;</span><br><span class="line">    temp.setC(2);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="en-resource://database/3909:1" alt="ba0cb99362b140ac0791866efddc4bd3.png"></p>
+<p>继承类的内存布局中，派生类是包含了基类的成员变量，从gdb打印的地址中可以看出，是在同一块内存中。<br><img src="en-resource://database/3911:1" alt="bcd1b6247d2c1f4c171814da78b99969.png"></p>
+<p>派生类也包含了基类的成员方法，也是在同一块内存地址中。但成员方法和成员变量存储的不是同一个地址.<br>通过info target命令，.text段在内存中的位置范围<br>0x00005555555550a0 - 0x0000555555555315 is .text</p>
+<p>基类函数地址<br>(void (*)(Basic * const, double)) 0x55555555525c <a href="Basic::setB(double)">Basic::setB(double)</a></p>
+<p>派生类函数地址<br>(void (*)(Derived * const, int)) 0x55555555527e <a href="Derived::setC(int)">Derived::setC(int)</a></p>
+<p><img src="en-resource://database/3913:1" alt="abeb40a2e87b6f1427fff78e2daa003c.png"></p>
+<h3 id="6、带有虚函数的类继承内存布局"><a href="#6、带有虚函数的类继承内存布局" class="headerlink" title="6、带有虚函数的类继承内存布局"></a>6、带有虚函数的类继承内存布局</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">class Basic &#123;</span><br><span class="line">public:</span><br><span class="line">    int a;</span><br><span class="line">    double b;</span><br><span class="line">    virtual void printInfo() &#123;</span><br><span class="line">        std::cout &lt;&lt; &quot;Basic: a = &quot; &lt;&lt; a &lt;&lt; &quot;, b = &quot; &lt;&lt; b &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    virtual void printB() &#123;</span><br><span class="line">        std::cout &lt;&lt; &quot;Basic in B&quot; &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    void setB(double value) &#123;</span><br><span class="line">        b = value; // 直接访问成员变量b</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">class Derived : public Basic &#123;</span><br><span class="line">public:</span><br><span class="line">    int c;</span><br><span class="line">    void printInfo() override &#123;</span><br><span class="line">        std::cout &lt;&lt; &quot;Derived: a = &quot; &lt;&lt; a &lt;&lt; &quot;, b = &quot; &lt;&lt; b &lt;&lt; &quot;, c = &quot; &lt;&lt; c &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    void setC(int value) &#123;</span><br><span class="line">        c = value; // 直接访问成员变量c</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main() &#123;</span><br><span class="line">    Derived derivedObj;</span><br><span class="line">    derivedObj.a = 10;</span><br><span class="line">    derivedObj.setB(3.14);</span><br><span class="line">    derivedObj.c = 1;</span><br><span class="line">    derivedObj.setC(2);</span><br><span class="line">    Basic* ptr = &amp;derivedObj; // 基类指针指向派生类对象</span><br><span class="line">    ptr-&gt;printInfo(); // 多态调用</span><br><span class="line">    ptr-&gt;printB(); // 调用</span><br><span class="line">    Basic  basicObj;</span><br><span class="line">    basicObj.a = 10;</span><br><span class="line">    basicObj.setB(3.14);</span><br><span class="line">    Basic* anotherPtr = &amp;basicObj;</span><br><span class="line">    anotherPtr-&gt;printInfo();</span><br><span class="line">    anotherPtr-&gt;printB();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="en-resource://database/3915:1" alt="e3deecd53c46d9e7d2d8e30247384f36.png"></p>
+<h3 id="7、为什么多态要引用或者指针才能调用多态实现呢？"><a href="#7、为什么多态要引用或者指针才能调用多态实现呢？" class="headerlink" title="7、为什么多态要引用或者指针才能调用多态实现呢？"></a>7、为什么多态要引用或者指针才能调用多态实现呢？</h3><p>因为如果不是引用，赋值时，基类对象其实是对派生类一个拷贝构造，<br>这里的虚函数表指针，并没有指向派生类的虚函数地址，这会调用虚函数时，实际调用的是基类的虚函数。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/01/03/%E5%8D%9A%E5%AE%A2%E6%B5%8B%E8%AF%951/" data-id="cmjzdwnvq0000hgjxh3nzawko" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/01/03/%E5%8D%9A%E5%AE%A2%E6%B5%8B%E8%AF%951/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
