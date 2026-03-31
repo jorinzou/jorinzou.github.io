@@ -1,0 +1,49 @@
+menu:
+  首页: /
+  分类: /categories
+  归档: /archives
+  
+rss: /atom.xml
+banner: "images/banner.jpg"
+subtitle: C/C++ · 内核 · 驱动 · 网络 · 数据结构 · 音视频
+
+links:
+  github: https://github.com/jorinzou
+
+excerpt_link: Read More
+fancybox: true
+
+copyright: |
+  © 2026 jorinzou
+
+sidebar: right
+widgets:
+- category
+- tag
+- tagcloud
+- archive
+- recent_posts
+
+archive_type: 'monthly'
+show_count: true
+recent_posts_limits: 10
+
+google_analytics:
+gauges_analytics:
+favicon: /favicon.png
+twitter:
+fb_admins:
+fb_app_id:
+
+disqus_shortname:
+valine:
+  enable: false
+  appId:
+  appKey:
+  notify: false
+  verify: false
+  pageSize: 10
+  avatar: mm
+  lang: zh-cn
+  placeholder: 欢迎留言交流
+  guest_info: nick,mail,link
